@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Canvas } from "@react-three/fiber";
+import { Vertual } from "./components/Vertual";
+import React from 'react'
 import './App.css'
 
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [flag, setFlag] = React.useState(false)
+  const [name, setName]= React.useState("")
+  const [gender,setGender]= React.useState("")
+
+  const onsubmit=()=>{
+    if(name && gender){
+      setFlag(true)
+    }
+    else{
+      alert("name and gender is required")
+    }
+  }
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    flag ?
+      
+      <Canvas shadows camera={{ position: [0, 2, 5] }}>
+        <Vertual name={name} gender={gender} />
+      </Canvas> :
+      <div class="container">
+        <div class="form-container">
+
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required onChange={(e)=>setName(e.target.value)}/>
+
+          <label for="gender">Gender:</label>
+          <select id="gender" name="gender" onChange={(e)=>setGender(e.target.value)} required>
+            <option value="" disabled selected>Select your gender</option>
+            <option value="male">male</option>
+            <option value="female">female</option>
+
+          </select>
+
+          <input type="submit" value="Submit" onClick={()=>onsubmit()} />
+
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+
+  );
 }
 
-export default App
+export default App;
