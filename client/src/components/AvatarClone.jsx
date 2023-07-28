@@ -5,9 +5,9 @@ import { useGLTF,useAnimations, useFBX } from '@react-three/drei'
 // import {useControls} from "leva"
 
 
-export function Avatar(props) {
+export function AvatarClone(props) {
   const group =useRef()
-  const { nodes, materials } = useGLTF(`models/${props.info.gender}.glb`)
+  const { nodes, materials } = useGLTF(`models/${props.info.gender}copy.glb`)
 
   const {animations:standingAnimation}=useFBX("animation/Standing.fbx")
   
@@ -49,4 +49,4 @@ export function Avatar(props) {
   )
 }
 
-// useGLTF.preload(`models/${props.info.gender}.glb`)
+// useGLTF.preload(`models/${props.info.gender}copy.glb`)

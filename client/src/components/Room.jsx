@@ -7,6 +7,8 @@ import React, { useRef } from 'react'
 import { useGLTF, useTexture,Html } from "@react-three/drei";
 import * as THREE from "three";
 import { Avatar } from './Avatar';
+import { AvatarClone } from './AvatarClone';
+
 import io from "socket.io-client";
 import axios from 'axios'
 
@@ -51,6 +53,7 @@ export function Room(props) {
             alert("server problem")
         }
         else{
+
             data.data.push(props.info)
             setLive(data.data)
         }
@@ -116,10 +119,11 @@ export function Room(props) {
           <p>{incoming}</p>
         </div>
     </Html>:<Html></Html>}
-    {live.map((user)=>
-        user.name==props.info.name?<Avatar info={props.info}/> :
-        <Avatar info={user} position={[2,0,1]}/>
+    {live.map((user,i)=>
+        user.name==props.info.name?<Avatar key={i} info={props.info}/> :
+        <AvatarClone key={i} info={user} position={[2,0,1]}/>
     )}
+
 
     <Html position={[0, 0, 0]}>
           <div style={{ width: '100%', padding: '100px', textAlign: 'center' }}>
