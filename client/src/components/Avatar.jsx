@@ -49,4 +49,4 @@ export function Avatar(props) {
   )
 }
 
-// useGLTF.preload(`models/${props.info.gender}.glb`)
+useGLTF.preload('models/${props.info.gender}.glb')
